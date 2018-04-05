@@ -1,4 +1,5 @@
-AllowOverride All
+php_flag log_errors on
+php_value error_log "PHP_errors.log"
 
 RewriteEngine On
 

@@ -17,8 +17,8 @@ return [
 	// Database settings
 	'db' => [
 	    'host' => 'localhost',
-	    'dbname' => 'exampleapp',
-	    'user' => 'user',
+	    'dbname' => 'id5271485_fake',
+	    'user' => 'id5271485_tester',
 	    'pass' => 'password',
 	],
     ],
