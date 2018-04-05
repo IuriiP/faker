@@ -1,0 +1,18 @@
+### deny iframing
+#Header set X-Frame-Options SAMEORIGIN
+
+### mod_rewrite
+RewriteEngine On
+RewriteBase /public
+# deny hidden files access
+RewriteRule ^\.(.*)$ - [F]
+
+### force ssl
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{SERVER_NAME}/%$1 [R,L]
+
+### internal redirect to index.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond $1 !index.php$
+RewriteRule ^(.*)$ index.php [L]

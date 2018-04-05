@@ -1,0 +1,17 @@
+### deny iframing
+#Header set X-Frame-Options SAMEORIGIN
+
+### mod_rewrite
+RewriteEngine On
+Options +FollowSymlinks
+RewriteBase /
+RewriteRule ^\.(.*)$ - [F]
+
+DirectoryIndex index.php
+
+### force ssl
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{SERVER_NAME}/%$1 [R,L]
+
+RewriteCond %{REQUEST_URI} !^public
+RewriteRule ^(.*)$ public/$1 [L]
