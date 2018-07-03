@@ -1,0 +1,136 @@
+{% extends "base.twig" %}
+{#
+{% set breadcrumbs=[] %}
+{% block head %}{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}{% endblock %}
+{% set logs=[] %}
+{% set learnMore="" %}
+{% block data %}{% endblock %}
+{% block containers %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block scripts %}{% endblock %}
+#}
+
+{% set breadcrumbs = ['documents'] %}
+
+{% block content %}
+	{% include 'about/create.html' %}
+{% endblock %}
+
+{% block data %}
+	<div class="row">
+		<div class="col-4">
+			<div class="list-group" id="list-tab" role="tablist">
+				<a class="list-group-item list-group-item-action active" id="list-empty-list" data-toggle="list" href="#list-empty" role="tab" aria-controls="empty">---</a>
+				<a class="list-group-item list-group-item-action" id="list-foreign-list" data-toggle="list" href="#list-foreign" role="tab" aria-controls="foreign">Foreign key</a>
+				<a class="list-group-item list-group-item-action" id="list-set-list" data-toggle="list" href="#list-set" role="tab" aria-controls="set">Set</a>
+				<a class="list-group-item list-group-item-action" id="list-number-list" data-toggle="list" href="#list-number" role="tab" aria-controls="number">Random Number</a>
+				<a class="list-group-item list-group-item-action" id="list-word-list" data-toggle="list" href="#list-word" role="tab" aria-controls="word">Word</a>
+				<a class="list-group-item list-group-item-action" id="list-sentence-list" data-toggle="list" href="#list-sentence" role="tab" aria-controls="sentence">Sentence</a>
+				<a class="list-group-item list-group-item-action" id="list-paragraph-list" data-toggle="list" href="#list-paragraph" role="tab" aria-controls="paragraph">Paragraph</a>
+				<a class="list-group-item list-group-item-action" id="list-text-list" data-toggle="list" href="#list-text" role="tab" aria-controls="text">Text</a>
+				<a class="list-group-item list-group-item-action" id="list-real-list" data-toggle="list" href="#list-real" role="tab" aria-controls="real">Real Text</a>
+				<a class="list-group-item list-group-item-action" id="list-date-list" data-toggle="list" href="#list-date" role="tab" aria-controls="date">Date/Time/DateTime</a>
+				<a class="list-group-item list-group-item-action" id="list-company-list" data-toggle="list" href="#list-company" role="tab" aria-controls="company">Company</a>
+				<a class="list-group-item list-group-item-action" id="list-person-list" data-toggle="list" href="#list-person" role="tab" aria-controls="person">Person</a>
+				<a class="list-group-item list-group-item-action" id="list-address-list" data-toggle="list" href="#list-address" role="tab" aria-controls="address">Address</a>
+				<a class="list-group-item list-group-item-action" id="list-credit-list" data-toggle="list" href="#list-credit" role="tab" aria-controls="credit">Credit Card</a>
+			</div>
+		</div>
+		<div class="col-8">
+			<div class="tab-content" id="nav-tabContent">
+				<article class="tab-pane fade show active" id="list-empty" role="tabpanel" aria-labelledby="list-empty-list">
+					Just an empty slot.
+				</article>
+				<article class="tab-pane fade" id="list-foreign" role="tabpanel" aria-labelledby="list-foreign-list">
+					Creates the random reference to another <b>existing</b> table.
+					<br /><code>From...</code> is the name of the foreign table.
+					<br /><code>...To</code> is the name of the foreign table field.
+				</article>
+				<article class="tab-pane fade" id="list-set" role="tabpanel" aria-labelledby="list-set-list">
+					Creates a random element (string) from the list, separated by commas, with biasing.
+					<br /><code>From...</code> is the basic list.
+					<br /><code>...To</code> are biases for increase the likelihood of some elements appearing.
+				</article>
+				<article class="tab-pane fade" id="list-number" role="tabpanel" aria-labelledby="list-number-list">
+					Creates a random number.
+					<br /><code>From...</code> is the minimum.
+					<br /><code>...To</code> is the maximum.
+				</article>
+				<article class="tab-pane fade" id="list-word" role="tabpanel" aria-labelledby="list-word-list">
+					Creates a random word (lorem ipsum).
+					<br />
+					<code>From...</code> is the creation rule. 
+					For a unique word, use the magic word. 
+					In case, if not a unique word, it will be expanded using 
+					the lexify mask from <code>To</code>.
+					<br />
+					The register of letters in the rule specifies <i>UPPER</i>, <i>lower</i>, <i>Ucfirst</i> or <i>mIxEd</i> in this word.
+					<br /><code>...To</code> is the lexify mask. It use <code>**##</code> (letter/number+letter/number+number+number) if omitted.
+				</article>
+				<article class="tab-pane fade" id="list-sentence" role="tabpanel" aria-labelledby="list-sentence-list">
+					Creates a random sentence (lorem ipsum).
+					<br /><code>From...</code> is the minimum number of words.
+					<br /><code>...To</code> is the maximum number of words.
+				</article>
+				<article class="tab-pane fade" id="list-paragraph" role="tabpanel" aria-labelledby="list-paragraph-list">
+					Creates a random paragraph (lorem ipsum).
+					<br /><code>From...</code> is the minimum number of sentences.
+					<br /><code>...To</code> is the maximum number of sentences.
+				</article>
+				<article class="tab-pane fade" id="list-text" role="tabpanel" aria-labelledby="list-text-list">
+					Creates a random text (lorem ipsum).
+					<br /><code>From...</code> is the minimum number of paragraphs.
+					<br /><code>...To</code> is the maximum number of paragraphs.
+				</article>
+				<article class="tab-pane fade" id="list-real" role="tabpanel" aria-labelledby="list-real-list">
+					Creates a random real text ('Alice in Wonderland').
+					<br /><code>From...</code> is the minimum number of paragraphs.
+					<br /><code>...To</code> is the maximum number of paragraphs.
+				</article>
+				<article class="tab-pane fade" id="list-date" role="tabpanel" aria-labelledby="list-date-list">
+					Creates a random date, time or datetime.
+					<br /><code>From...</code> is the minimum value.
+					<br /><code>...To</code> is the maximum value.
+				</article>
+				<article class="tab-pane fade" id="list-company" role="tabpanel" aria-labelledby="list-company-list">
+					Creates a random company name.
+				</article>
+				<article class="tab-pane fade" id="list-person" role="tabpanel" aria-labelledby="list-person-list">
+					Creates a random person and his/her data.
+					<ul class="list-group">
+						<li class="list-group-item">Gender. <code>female/male</code></li>
+						<li class="list-group-item">Title. <code>Prof./Mr./Mrs...</code> (gender dependent)</li>
+						<li class="list-group-item">First Name. <code>Adam/Eva...</code> (gender dependent)</li>
+						<li class="list-group-item">Last Name. <code>Smith/Doe...</code> (independent)</li>
+						<li class="list-group-item">Full Name. <code>Title+First Name+Last Name</code></li>
+						<li class="list-group-item">Credit Card Name. <code>First Name+Last Name</code></li>
+						<li class="list-group-item">Unique Login. From First Name...</li>
+						<li class="list-group-item">Age. From: Minimum. To: Maximum</li>
+						<li class="list-group-item">Phone.</li>
+						<li class="list-group-item">E-mail</li>
+					</ul>	
+				</article>
+				<article class="tab-pane fade" id="list-address" role="tabpanel" aria-labelledby="list-address-list">
+					Creates a random address.
+					<ul class="list-group">
+						<li class="list-group-item">Country</li>
+						<li class="list-group-item">State</li>
+						<li class="list-group-item">City</li>
+						<li class="list-group-item">Street address</li>
+						<li class="list-group-item">Full address</li>
+					</ul>	
+				</article>
+				<article class="tab-pane fade" id="list-credit" role="tabpanel" aria-labelledby="list-credit-list">
+					Creates a random credit card data.
+					<ul class="list-group">
+						<li class="list-group-item">Type</li>
+						<li class="list-group-item">Number</li>
+						<li class="list-group-item">Date</li>
+					</ul>	
+				</article>
+			</div>
+		</div>
+	</div>
+{% endblock %}

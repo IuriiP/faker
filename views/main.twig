@@ -1,0 +1,26 @@
+{# main page #}
+{% extends "base.twig" %}
+{#
+{% set breadcrumbs=[] %}
+{% block head %}{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}{% endblock %}
+{% set logs=[] %}
+{% set learnMore="" %}
+{% block data %}{% endblock %}
+{% block containers %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block scripts %}{% endblock %}
+#}
+{% block header %}
+	Fake Testing
+{% endblock %}
+
+{% block content %}
+	This site is designed to quickly create databases with fake data.
+	<br />
+	It uses the <a href="https://github.com/fzaninotto/Faker">Faker project</a>
+	for fill in the created tables.
+	<br />
+	Tables can be downloaded later for use in your projects as fake testing.
+{% endblock %}

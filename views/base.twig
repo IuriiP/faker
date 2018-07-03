@@ -1,0 +1,105 @@
+{# base #}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Faker">
+		<meta name="author" content="IuriiP">
+		<link rel="icon" href="/favicon.ico">
+		<title>
+			{% for item in breadcrumbs %}
+				{{ item|capitalize }} -
+			{% endfor %}Faker
+		</title>
+		<link rel="stylesheet" 
+		      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" 
+		      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" 
+		      crossorigin="anonymous">
+		<link rel="stylesheet" 
+		      href="/css/base.css">
+	{% block head %}{% endblock %}
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#">Faker</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" 
+			aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarsDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/about">Documentation</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown_database" 
+					   data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">Database</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown_database">
+						<a class="dropdown-item" href="/database/manage">Manage</a>
+						<a class="dropdown-item" href="/database/backup">Backup</a>
+						<a class="dropdown-item"
+						   data-toggle="modal" data-title="Restore" data-target="#modalLoad">Restore</a>
+						<a class="dropdown-item" href="/database/generate">Generate</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown_rest" 
+					   data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">REST</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown_rest">
+						<a class="dropdown-item" href="/rest/get">Get</a>
+						<a class="dropdown-item" href="/rest/post">Post</a>
+						<a class="dropdown-item" href="/rest/delete">Delete</a>
+						<a class="dropdown-item" href="/rest/put">Put</a>
+						<a class="dropdown-item" href="/rest/patch">Patch</a>
+					</div>
+				</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+	<header role="header" class="container">
+		<h1 class="display-4">{% block header %}{% endblock %}</h1>
+		<p>{% block content %}{% endblock %}</p>
+		{% if logs %}
+			<table>
+				{% for rec in logs %}
+					<tr class="{{ rec.class }}">
+						<td><strong>{{ rec.type }}</strong>:</td>
+						<td>{{ rec.text }}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+		{% if learnMore %}
+			<p><a class="btn btn-primary btn-lg" href="{{ learnMore }}" role="button">Learn more »</a></p>
+		{% endif %}
+	</header>
+	<main role="main" class="container">
+		<div class="container">{% block data %}{% endblock %}</div>
+		<div class="row">{% block containers %}{% endblock %}</div>
+	</main>
+	<hr>
+	<footer role="footer" class="container">
+		<p>&copy; <a href="https://github.com/IuriiP/faker">IuriiP</a>, 2018</p>{% block footer %}{% endblock %}
+	</footer>
+	<script 
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+		crossorigin="anonymous" 
+	src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+	<script 
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+		crossorigin="anonymous"
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
+	<script 
+		integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" 
+		crossorigin="anonymous"
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+{% block scripts %}{% endblock %}
+<script 
+src="/js/bootstrap-confirmation.min.js"></script>
+</body>
+</html>

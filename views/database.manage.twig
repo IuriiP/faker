@@ -1,0 +1,131 @@
+{% extends "database.twig" %}
+
+{% set breadcrumbs = ['manage'] %}
+
+{% block header %}
+	Manage {{ parent() }}
+{% endblock %}
+
+{% block content %}
+	Provide access to databases....
+{% endblock %}
+
+{% block containers %}
+	{% for container in containers %}
+		<div class="col-md-4">
+			<h2>{{ container.header }}</h2>
+			<p>{{ container.data | join(', ') }}</p>
+			{% for action in container.actions %}
+				<p><{{ action.tag }} class="btn btn-secondary"
+					class="btn btn-secondary"
+					{% for key,item in action.data %}
+						{{ key }}="{{ item }}"
+					{% endfor %}
+					role="button">{{ action.name }} »</{{ action.tag }}></p>
+				{% endfor %}
+		</div>
+	{% endfor %}
+{% endblock %}
+
+{% block footer %}
+	<!-- Modal -->
+	<div id="modalCreate" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Create & fill table</h4>
+				</div>
+				<form method="post" action="/database/manage">
+					<div class="modal-body">
+						<table>
+							<tr><td>Table name:</td><td><input name="table" type="text" required="true" /></td></tr>
+							<tr><td>Rows generate:</td><td><input name="rows" type="number" min="10" maxlength="5" value="10" /></td></tr>
+						</table>
+						<p>Define up to 10 fields:</p>
+						<table>
+							<tr><th>Generator Type</th><th>Field Name</th><th>From...</th><th>...To</th></tr>
+									{% for i in 0..9 %}
+								<tr>
+									<td>	<select name="type[{{ i }}]">
+											<option value="" selected>---</option>
+											<option value="link" data-toggle="tooltip" title="From: Foreign Table. To: Field">Foreign key</option>
+											<option value="set" data-toggle="tooltip" title="From: Base list (commas). To: Biased list">Set</option>
+											<option value="randomNumber" data-toggle="tooltip" title="From: Minimum. To: Maximum">Random Number</option>
+											<optgroup label="Text">
+												<option value="word" data-toggle="tooltip" title="From: Flag (unique,upper,lower,ucfirst). To: Mask (# - num, ? - letter)">Word</option>
+												<option value="sentence" data-toggle="tooltip" title="From: Minimum. To: Maximum">Sentence</option>
+												<option value="paragraph" data-toggle="tooltip" title="From: Minimum. To: Maximum">Paragraph</option>
+												<option value="text" data-toggle="tooltip" title="From: Minimum. To: Maximum">Text</option>
+												<option value="realText" data-toggle="tooltip" title="From: Minimum. To: Maximum">Real Text</option>
+											</optgroup>
+											<optgroup label="Tate/time">
+												<option value="date" data-toggle="tooltip" title="From: Minimum. To: Maximum">Date</option>
+												<option value="time" data-toggle="tooltip" title="From: Minimum. To: Maximum">Time</option>
+												<option value="datetime" data-toggle="tooltip" title="From: Minimum. To: Maximum">DateTime</option>
+											</optgroup>
+											<option value="company">Company</option>
+											<optgroup label="Person">
+												<option value="gender">Gender</option>
+												<option value="title">Title</option>
+												<option value="first">First Name</option>
+												<option value="last">Last Name</option>
+												<option value="name">Full Name</option>
+												<option value="creditName">Credit Card Name</option>
+												<option value="login">Unique Login</option>
+												<option value="age" data-toggle="tooltip" title="From: Minimum. To: Maximum">Age</option>
+												<option value="phone">Phone</option>
+												<option value="email">E-mail</option>
+											</optgroup>
+											<optgroup label="Address">
+												<option value="country">Country</option>
+												<option value="state">State</option>
+												<option value="city">City</option>
+												<option value="streetAddr">Street address</option>
+												<option value="address">Full address</option>
+											</optgroup>
+											<optgroup label="Credit card">
+												<option value="creditType">Credit Card Type</option>
+												<option value="creditNumber">Credit Card Number</option>
+												<option value="creditDate">Credit Card Date</option>
+											</optgroup>
+										</select>
+									</td>
+									<td><input name="field[{{ i }}]" size="8" /></td>
+									<td><input name="from[{{ i }}]" size="8" placeholder="" /></td>
+									<td><input name="till[{{ i }}]" size="8" placeholder="" /></td>
+								</tr>
+							{% endfor %}
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-default">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div id="modalLoad" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Load JSON table</h4>
+				</div>
+				<form method="post" action="/database/manage" enctype="multipart/form-data">
+					<input name="_METHOD" type="hidden" value="PUT"/>
+					<div class="modal-body">
+						<p>Select JSON for load: <input name="json" type="file" /></p>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-default">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -4,22 +4,27 @@ return [
     'settings' => [
 	'displayErrorDetails' => true, // set to false in production
 	'addContentLengthHeader' => false, // Allow the web server to send the content-length header
-// Renderer settings
+	// Renderer settings
 	'renderer' => [
-	    'template_path' => __DIR__ . '/../templates/',
+	    'template_path' => BASE . '/templates/',
+	],
+	// Twig settings
+	'view' => [
+	    'path' => BASE . '/views/',
+	    'cache' => false, // BASE . '/cache/',
 	],
 	// Monolog settings
 	'logger' => [
 	    'name' => 'slim-app',
-	    'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
+	    'path' => isset($_ENV['docker']) ? 'php://stdout' : BASE . '/logs/app.log',
 	    'level' => \Monolog\Logger::DEBUG,
 	],
 	// Database settings
 	'db' => [
-	    'host' => 'localhost',
-	    'dbname' => 'id5271485_fake',
-	    'user' => 'id5271485_tester',
-	    'pass' => 'password',
+	    'host' => DATABASE\HOST,
+	    'dbname' => DATABASE\DBNAME,
+	    'user' => DATABASE\USER,
+	    'pass' => DATABASE\PASS,
 	],
     ],
 ];

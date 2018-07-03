@@ -1,0 +1,43 @@
+{% extends "base.twig" %}
+{#
+{% set breadcrumbs=[] %}
+{% block head %}{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}{% endblock %}
+{% set logs=[] %}
+{% set learnMore="" %}
+{% block data %}{% endblock %}
+{% block containers %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block scripts %}{% endblock %}
+#}
+
+{% set breadcrumbs = ['documents'] %}
+
+{% block data %}
+	{% set page = page is empty ? 'project' : page %}
+	{% set tablist = {(page): 'active'} %}
+	{% set tabcont = {(page): 'show active'} %}
+	<div class="row">
+		<div class="col-2">
+			<div class="list-group" id="list-tab" role="tablist">
+				<a class="list-group-item list-group-item-action {{ tablist.project }}" id="list-project-list" data-toggle="list" href="#list-project" role="tab" aria-controls="project">Project</a>
+				<a class="list-group-item list-group-item-action {{ tablist.database }}" id="list-database-list" data-toggle="list" href="#list-database" role="tab" aria-controls="database">Database</a>
+				<a class="list-group-item list-group-item-action {{ tablist.rest }}" id="list-rest-list" data-toggle="list" href="#list-rest" role="tab" aria-controls="rest">REST</a>
+			</div>
+		</div>
+		<div class="col-10">
+			<div class="tab-content" id="nav-tabContent">
+				<article class="tab-pane fade {{ tabcont.project }}" id="list-project" role="tabpanel" aria-labelledby="list-project-list">
+					{% include 'about/project.html' %}
+				</article>
+				<article class="tab-pane fade {{ tabcont.database }}" id="list-database" role="tabpanel" aria-labelledby="list-database-list">
+					{% include 'about/database.html' %}
+				</article>
+				<article class="tab-pane fade {{ tabcont.rest }}" id="list-rest" role="tabpanel" aria-labelledby="list-rest-list">
+					{% include 'about/rest.html' %}
+				</article>
+			</div>
+		</div>
+	</div>
+{% endblock %}
